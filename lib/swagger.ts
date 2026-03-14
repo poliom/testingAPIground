@@ -28,9 +28,9 @@ export const swaggerSpec = {
         type: 'object',
         required: ['email', 'password'],
         properties: {
-          email: { type: 'string', format: 'email', example: 'user@example.com' },
-          password: { type: 'string', minLength: 6, example: 'password123' },
-          full_name: { type: 'string', example: 'John Doe', nullable: true },
+          email: { type: 'string', format: 'email', example: 'admin@test.com' },
+          password: { type: 'string', minLength: 6, example: 'Admin123!' },
+          full_name: { type: 'string', example: 'Admin User', nullable: true },
         },
       },
       AuthResponse: {
@@ -348,11 +348,12 @@ export const swaggerSpec = {
       },
     },
     '/users/{id}': {
+      parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' }, example: '00000000-0000-0000-0000-000000000002' }],
       get: {
         tags: ['Users'],
         summary: 'Get user by ID (ADMIN or own user)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           200: { description: 'User found', content: { 'application/json': { schema: { $ref: '#/components/schemas/UserResponse' } } } },
           401: { description: 'Unauthorized' },
@@ -364,7 +365,7 @@ export const swaggerSpec = {
         tags: ['Users'],
         summary: 'Full update user (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: { 'application/json': { schema: { $ref: '#/components/schemas/UserUpdateRequest' } } },
@@ -381,7 +382,7 @@ export const swaggerSpec = {
         tags: ['Users'],
         summary: 'Partial update user (ADMIN or own user)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: { 'application/json': { schema: { $ref: '#/components/schemas/UserUpdateRequest' } } },
@@ -397,7 +398,7 @@ export const swaggerSpec = {
         tags: ['Users'],
         summary: 'Delete user (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           204: { description: 'Deleted' },
           401: { description: 'Unauthorized' },
@@ -407,11 +408,12 @@ export const swaggerSpec = {
       },
     },
     '/users/{id}/role': {
+      parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' }, example: '00000000-0000-0000-0000-000000000002' }],
       put: {
         tags: ['Users'],
         summary: 'Change user role (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: { 'application/json': { schema: { $ref: '#/components/schemas/RoleRequest' } } },
@@ -425,11 +427,12 @@ export const swaggerSpec = {
       },
     },
     '/users/{id}/permissions': {
+      parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' }, example: '00000000-0000-0000-0000-000000000002' }],
       get: {
         tags: ['Users'],
         summary: "Get user's permissions",
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           200: {
             description: 'Permissions',
@@ -441,11 +444,12 @@ export const swaggerSpec = {
       },
     },
     '/users/{id}/avatar': {
+      parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' }, example: '00000000-0000-0000-0000-000000000002' }],
       post: {
         tags: ['Users'],
         summary: 'Upload avatar image',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: {
@@ -480,7 +484,7 @@ export const swaggerSpec = {
         tags: ['Users'],
         summary: 'Get avatar URL',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           200: {
             description: 'Avatar URL',
@@ -535,10 +539,11 @@ export const swaggerSpec = {
       },
     },
     '/products/{id}': {
+      parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' }, example: '10000000-0000-0000-0000-000000000001' }],
       get: {
         tags: ['Products'],
         summary: 'Get product by ID (public)',
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           200: { description: 'Product', content: { 'application/json': { schema: { $ref: '#/components/schemas/ProductResponse' } } } },
           404: { description: 'Not found' },
@@ -548,7 +553,7 @@ export const swaggerSpec = {
         tags: ['Products'],
         summary: 'Full update product (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: { 'application/json': { schema: { $ref: '#/components/schemas/ProductRequest' } } },
@@ -564,7 +569,7 @@ export const swaggerSpec = {
         tags: ['Products'],
         summary: 'Partial update product (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: { 'application/json': { schema: { $ref: '#/components/schemas/ProductRequest' } } },
@@ -580,7 +585,7 @@ export const swaggerSpec = {
         tags: ['Products'],
         summary: 'Delete product (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           204: { description: 'Deleted' },
           401: { description: 'Unauthorized' },
@@ -622,11 +627,12 @@ export const swaggerSpec = {
       },
     },
     '/orders/{id}': {
+      parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' }, example: '20000000-0000-0000-0000-000000000001' }],
       get: {
         tags: ['Orders'],
         summary: 'Get order by ID with items (ADMIN or own user)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           200: { description: 'Order with items', content: { 'application/json': { schema: { $ref: '#/components/schemas/OrderResponse' } } } },
           401: { description: 'Unauthorized' },
@@ -638,7 +644,7 @@ export const swaggerSpec = {
         tags: ['Orders'],
         summary: 'Update order status (ADMIN only)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         requestBody: {
           required: true,
           content: { 'application/json': { schema: { $ref: '#/components/schemas/OrderUpdateRequest' } } },
@@ -654,7 +660,7 @@ export const swaggerSpec = {
         tags: ['Orders'],
         summary: 'Delete order (ADMIN or USER if pending)',
         security: [{ BearerAuth: [] }],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }],
+        parameters: [],
         responses: {
           204: { description: 'Deleted' },
           401: { description: 'Unauthorized' },
