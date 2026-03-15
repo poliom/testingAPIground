@@ -1,7 +1,4 @@
 {
-  "protection": {
-    "deploymentType": "none"
-  },
   "headers": [
     {
       "source": "/api/(.*)",
